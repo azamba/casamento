@@ -102,6 +102,17 @@
       </div>
     </section>
   </main>
+  <!-- Background Music -->
+  <audio id="bg-music" loop>
+    <source src="assets/musica.mp3" type="audio/mpeg">
+    Seu navegador não suporta o elemento de áudio.
+  </audio>
+
+  <!-- Floating Music Control -->
+  <div class="music-control" id="music-control">
+    <i class="fas fa-play" id="music-icon"></i>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
     crossorigin="anonymous"></script>
@@ -109,6 +120,42 @@
     document.addEventListener('DOMContentLoaded', () => {
       const elements = document.querySelectorAll('.fade-in');
       elements.forEach(el => el.classList.add('visible'));
+
+      // Music Control Logic
+      const music = document.getElementById('bg-music');
+      const musicControl = document.getElementById('music-control');
+      const musicIcon = document.getElementById('music-icon');
+      let isPlaying = false;
+
+      function toggleMusic() {
+        if (isPlaying) {
+          music.pause();
+          musicIcon.classList.remove('fa-pause');
+          musicIcon.classList.add('fa-play');
+        } else {
+          music.play().then(() => {
+            musicIcon.classList.remove('fa-play');
+            musicIcon.classList.add('fa-pause');
+          }).catch(error => {
+            console.log("Autoplay prevented:", error);
+          });
+        }
+        isPlaying = !isPlaying;
+      }
+
+      musicControl.addEventListener('click', toggleMusic);
+
+      // Attempt autoplay on first interaction if not already playing
+      document.body.addEventListener('click', function initAudio() {
+        if (!isPlaying) {
+          music.play().then(() => {
+            isPlaying = true;
+            musicIcon.classList.remove('fa-play');
+            musicIcon.classList.add('fa-pause');
+          }).catch(e => console.log("Audio play failed on click:", e));
+        }
+        document.body.removeEventListener('click', initAudio);
+      }, { once: true });
     });
   </script>
 </body>

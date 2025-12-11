@@ -324,3 +324,44 @@ body {
         width: auto;
     }
 }
+
+/* Music Control Button */
+.music-control {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transition: transform 0.3s ease, background-color 0.3s;
+    animation: pulse 2s infinite;
+}
+
+.music-control:hover {
+    transform: scale(1.1);
+    background-color: #b73a55;
+}
+
+.music-control i {
+    font-size: 1.2rem;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(214, 66, 104, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(214, 66, 104, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(214, 66, 104, 0);
+    }
+}
