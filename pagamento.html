@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presente em Dinheiro - Alexandre & Josilene</title>
+  <meta name="description" content="Informações para presente em dinheiro via Pix.">
+  <link rel="stylesheet" href="style.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Pinyon+Script&family=Lora:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&family=Cinzel:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    .pix-container {
+      background: rgba(255, 255, 255, 0.6);
+      padding: 30px;
+      border-radius: 12px;
+      margin-top: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .pix-key {
+      font-family: var(--font-body);
+      font-size: 1.1rem;
+      color: var(--primary-color);
+      background: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin: 15px 0;
+      border: 1px dashed var(--primary-color);
+      display: inline-block;
+      word-break: break-all;
+    }
+
+    .pix-instructions {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--text-color);
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="text-start mt-5 ps-5">
+    <a href="index.html" class="btn btn-md btn-light rounded-pill">
+      <i class="bi bi-chevron-left"></i>
+    </a>
+  </div>
+  <main class="container text-center fade-in">
+
+    <div class="logo">
+
+      <img src="assets/images/logo.png" alt="Logo Casamento">
+    </div>
+
+    <h1 class="month" style="font-size: 2rem; margin-bottom: 5px;">Sugestão de Presente</h1>
+
+    <div class="pix-container">
+      <p class="pix-instructions">
+        Para nós, a sua presença é o maior presente!<br>
+        Mas, se desejar nos presentear, ficaremos muito felizes com qualquer contribuição para o próximo churrasco.
+      </p>
+
+      <div id="qrcode" style="display: flex; justify-content: center; margin-bottom: 20px;"></div>
+      <p style="margin-bottom: 5px; font-weight: 600;">Chave Pix:</p>
+      <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+        <div class="pix-key" id="pix-key-text" style="margin: 0;">01010596047</div>
+        <button id="copy-btn" class="btn btn-outline-danger btn-sm" title="Copiar">
+          <i class="fas fa-copy"></i>
+        </button>
+      </div>
+      <div id="copy-feedback"
+        style="font-size: 0.8rem; color: #28a745; height: 1.2em; margin-top: 5px; opacity: 0; transition: opacity 0.3s;">
+        Copiado!</div>
+
+      <p style="font-size: 0.8rem; opacity: 0.8; margin-top: 15px;">Banco: Nú Pagamentos S.A | Alexandre Azambuja
+        Pereira</p>
+    </div>
+
+
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const elements = document.querySelectorAll('.fade-in');
+      elements.forEach(el => el.classList.add('visible'));
+
+      // Generate QR Code
+      const pixKey = "01010596047";
+      const pixPayload = "00020126360014BR.GOV.BCB.PIX0114+55169974466245204000053039865802BR5925Alexandre Azambuja Pereir6009SAO PAULO62140510SDxfTyxA7r63047C9F";
+
+      new QRCode(document.getElementById("qrcode"), {
+        text: pixPayload,
+        width: 128,
+        height: 128,
+        colorDark: "#D64268", // using primary color
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.M
+      });
+
+      // Copy Functionality
+      const copyBtn = document.getElementById('copy-btn');
+      const feedback = document.getElementById('copy-feedback');
+
+      copyBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(pixKey).then(() => {
+          feedback.style.opacity = '1';
+          setTimeout(() => {
+            feedback.style.opacity = '0';
+          }, 2000);
+        }).catch(err => {
+          console.error('Erro ao copiar: ', err);
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

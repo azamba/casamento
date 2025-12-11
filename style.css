@@ -11,6 +11,7 @@
 }
 body{
     background-color: var(--bg-color);
+    padding-bottom: 40px;
     
 }
 .coracao{
@@ -54,7 +55,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: 30px;
-    background: rgba(255, 255, 255, 0.4);
     border-radius: 8px; /* Slight softening if card-like */
     backdrop-filter: blur(2px);
 }
@@ -131,7 +131,7 @@ body {
 .logo {
     width: 100%;
     max-width: 500px; /* Adjusts properly on desktop without being too huge */
-    margin: 0 auto 20px auto;
+    margin: 0 auto 10px auto;
 }
 
 .logo img {
@@ -162,9 +162,10 @@ body {
     font-family: var(--font-body) !important;
     font-weight: 400;
     font-size: 1.8rem;
-    color: var(--primary-color);
+    color: #6d3947; 
     letter-spacing: 2px;
     margin-bottom: 5px;
+    margin-left: -10px;
 }
 
 .date-grid {
@@ -198,6 +199,7 @@ body {
     font-weight: 400;
     color: #6d3947; 
     margin-top: 5px;
+    margin-left: -10px;
 }
 
 /* Location */
