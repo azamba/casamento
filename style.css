@@ -127,6 +127,19 @@ body {
 }
 /* ------------------------ */
 
+
+.logo {
+    width: 100%;
+    max-width: 500px; /* Adjusts properly on desktop without being too huge */
+    margin: 0 auto 20px auto;
+}
+
+.logo img {
+    width: 100%;
+    height: auto; /* Maintains aspect ratio */
+    display: block;
+}
+
 .invite-text {
     font-size: 0.7rem;
     text-transform: uppercase;
