@@ -97,18 +97,33 @@ body {
     font-weight: 400;
     font-style: normal;
     font-size: 5rem;
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    line-height: 1;
 }
 
-.letter {
- color: var(--primary-color);   
-}
 
 .letter-a {
     color: var(--primary-color);
+    text-align: left;
+    padding-bottom: 1rem;
 }
+
+.heart{
+ margin-top: 5rem;   
+ margin-left: -10rem;
+}
+
 
 .letter-j {
     color: var(--primary-color);
+    text-align: right;
+    margin-left: -10rem;
+    margin-top: 10rem;
+    padding-top: 1;   
 }
 /* ------------------------ */
 
