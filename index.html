@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alexandre & Josilene - Nosso Casamento</title>
+  <meta name="description" content="Site de casamento de Alexandre e Josilene. Detalhes sobre a cerimônia e festa.">
+  <link rel="stylesheet" href="style.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Pinyon+Script&family=Lora:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&family=Cinzel:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+  <div class="background-texture"></div>
+  <!-- Decorative Corners -->
+  <div class="floral-corner top-left"></div>
+  <div class="floral-corner bottom-right"></div>
+
+  <main class="container">
+    <!-- Header / Intro -->
+    <header class="fade-in">
+      <p class="intro-quote">
+        “O destino nos uniu, o amor nos fortaleceu e a bênção dos céus tornou este sonho real.”
+      </p>
+    </header>
+
+    <!-- Main Names with Monogram -->
+    <section class="names-section fade-in delay-1">
+      <div class="monogram-container">
+        <span class="side-name left">Alexandre</span>
+        <div class="monogram-logo">
+          <span class="letter-a">A</span>
+          <span class="letter-j">J</span>
+        </div>
+        <span class="side-name right">Josilene</span>
+      </div>
+
+      <p class="invite-text">
+        CONVIDAMOS VOCÊ PARA A CELEBRAÇÃO DO NOSSO<br>
+        CASAMENTO A SER REALIZADO EM
+      </p>
+    </section>
+
+    <!-- Date Section -->
+    <section class="date-section fade-in delay-2">
+      <h2 class="month">ABRIL</h2>
+      <div class="date-grid">
+        <span class="weekday">Sábado</span>
+        <span class="day-number">11</span>
+        <span class="time">às 19:00h</span>
+      </div>
+      <h3 class="year">2026</h3>
+    </section>
+
+    <!-- Location Section -->
+    <section class="location-section fade-in delay-3">
+      <p class="venue-name">CABAÑA RESTAURANTE ARGENTINO</p>
+      <p class="venue-address">
+        PRAÇA BOAVENTURA FERREIRA DA ROSA, 218<br>
+        JARDIM SUMARÉ - RIBEIRÃO PRETO - SP
+      </p>
+    </section>
+
+    <!-- Action Icons -->
+    <section class="actions-section fade-in delay-4">
+      <div class="action-item">
+        <a href="https://goo.gl/maps/placeholder" target="_blank" class="circle-icon">
+          <i class="fas fa-map-marker-alt"></i>
+        </a>
+        <span class="action-label">Localização</span>
+      </div>
+      <div class="action-item">
+        <a href="#" class="circle-icon">
+          <i class="fas fa-check"></i>
+        </a>
+        <span class="action-label">Confirmação<br>de presença</span>
+      </div>
+      <div class="action-item">
+        <a href="#" class="circle-icon">
+          <i class="fas fa-gift"></i>
+        </a>
+        <span class="action-label">Lista de<br>presentes</span>
+      </div>
+      <div class="action-item">
+        <a href="#" class="circle-icon">
+          <i class="fas fa-hand-holding-usd"></i>
+        </a>
+        <span class="action-label">Presente em<br>dinheiro</span>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const elements = document.querySelectorAll('.fade-in');
+      elements.forEach(el => el.classList.add('visible'));
+    });
+  </script>
+</body>
+
+</html>
