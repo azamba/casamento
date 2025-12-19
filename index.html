@@ -23,7 +23,38 @@
 </head>
 
 <body>
+  <!-- Envelope Intro Overlay -->
+  <div id="envelope-overlay">
+    <div class="envelope-wrapper" id="envelope-wrapper">
+      <div class="envelope">
+        <div class="letter">
+          <h1>Alexandre & Josilene</h1>
+          <p>11 . 04 . 2026</p>
+        </div>
 
+        <!-- Envelope Parts -->
+        <div class="paper-part envelope-left"></div>
+        <div class="paper-part envelope-right"></div>
+        <div class="paper-part envelope-bottom"></div>
+
+        <div class="paper-part envelope-flap">
+          <div class="flap-content">
+            <div class="flap-text-name">Alexandre & Josilene</div>
+            <span class="flap-text-info">11 . 04 . 2026</span>
+          </div>
+        </div>
+
+        <div class="wax-seal">
+          <img src="assets/images/marca.png" alt="Selo">
+        </div>
+      </div>
+      <div class="tap-hint">
+        Toque para abrir
+      </div>
+    </div>
+  </div>
+
+  <div id="photo-container"></div>
 
   <main class="container-fluid text-center">
     <!-- Header / Intro -->
@@ -87,18 +118,12 @@
         </a>
         <span class="action-label">Confirmação<br>de presença</span>
       </div>
-      <div class="action-item">
-        <a href="https://www.swift.com.br/churrasco/cortes-especiais?o=mais-vendidos" class="circle-icon"
-          target="_blank" rel="noopener noreferrer">
-          <i class="fas fa-gift"></i>
-        </a>
-        <span class="action-label">Lista de<br>presentes</span>
-      </div>
+
       <div class="action-item">
         <a href="pagamento.html" class="circle-icon">
           <i class="fas fa-hand-holding-usd"></i>
         </a>
-        <span class="action-label">Presente em<br>dinheiro</span>
+        <span class="action-label">Lista de<br>presentes</span>
       </div>
     </section>
   </main>
@@ -118,8 +143,68 @@
     crossorigin="anonymous"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // --- Envelope Logic ---
+      const envelopeOverlay = document.getElementById('envelope-overlay');
+      const envelopeWrapper = document.getElementById('envelope-wrapper');
+
+      // Function to open envelope
+      function openEnvelope() {
+        envelopeWrapper.classList.add('open');
+
+        // Wait for flap animation then fade out overlay
+        setTimeout(() => {
+          envelopeOverlay.classList.add('hidden');
+          // Optional: trigger music logic here if needed
+        }, 800); // 800ms delay matches CSS transitions rough timing
+      }
+
+      // Add click event to the wrapper (or just the seal)
+      envelopeWrapper.addEventListener('click', openEnvelope);
+      // ---------------------
+
       const elements = document.querySelectorAll('.fade-in');
       elements.forEach(el => el.classList.add('visible'));
+
+      // --- Dynamic Photos Logic ---
+      const photoContainer = document.getElementById('photo-container');
+      // Update this list if you add new photos to assets/images/fotos
+      const photos = ['1.JPG', '2.JPG', '3.JPG', '4.jpg', '5.jpg'];
+
+      photos.forEach((photo, index) => {
+        const div = document.createElement('div');
+        div.classList.add('photo-frame');
+
+        const img = document.createElement('img');
+        img.src = `assets/images/fotos/${photo}`;
+        img.alt = "Foto do Casamento";
+        div.appendChild(img);
+
+        // Scatter Logic
+        // We want them distributed vertically: 0px to 100% height?
+        // Let's use simpler percentage approximations
+        // 4 photos -> ~25% vertical segments
+        const verticalSegment = 100 / photos.length;
+        const topPos = (verticalSegment * index) + (Math.random() * (verticalSegment - 10)); // adding some randomness
+
+        // Alternate Sides: Even on Left, Odd on Right
+        // Or random, but alternating looks better for balance
+        const isLeft = index % 2 === 0;
+        const sidePos = Math.random() * 10; // 0% to 10% from the edge
+
+        div.style.top = `${topPos}%`;
+        if (isLeft) {
+          div.style.left = `${sidePos}%`;
+          // Rotate slightly right
+          div.style.transform = `rotate(${Math.random() * 20 - 5}deg)`;
+        } else {
+          div.style.right = `${sidePos}%`;
+          // Rotate slightly left
+          div.style.transform = `rotate(${Math.random() * 20 - 15}deg)`;
+        }
+
+        photoContainer.appendChild(div);
+      });
+      // ----------------------------
 
       // Music Control Logic
       const music = document.getElementById('bg-music');
@@ -145,17 +230,18 @@
 
       musicControl.addEventListener('click', toggleMusic);
 
-      // Attempt autoplay on first interaction if not already playing
-      document.body.addEventListener('click', function initAudio() {
+      // Attempt autoplay on first interaction (ENVELOPE CLICK)
+      // Since the user clicks the envelope, this is a perfect time to start audio!
+      envelopeWrapper.addEventListener('click', function initAudioWithEnvelope() {
         if (!isPlaying) {
           music.play().then(() => {
             isPlaying = true;
             musicIcon.classList.remove('fa-play');
             musicIcon.classList.add('fa-pause');
-          }).catch(e => console.log("Audio play failed on click:", e));
+          }).catch(e => console.log("Audio play failed on envelope click:", e));
         }
-        document.body.removeEventListener('click', initAudio);
       }, { once: true });
+
     });
   </script>
 </body>
