@@ -314,14 +314,27 @@ body {
     }
 
     .actions-section {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        justify-items: center;
-        gap: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: nowrap;
+        padding: 0 10px;
     }
 
     .action-item {
         width: auto;
+        flex: 0 1 auto;
+    }
+    
+    .circle-icon {
+        width: 50px; 
+        height: 50px;
+        font-size: 1.2rem;
+    }
+    
+    .action-label {
+        font-size: 0.65rem; 
     }
 }
 
@@ -366,26 +379,29 @@ body {
     }
 }
 
-/* Photo Gallery / Collage Background */
+/* Photo Gallery / Collage */
 #photo-container {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative;
     width: 100%;
-    height: 100%;
-    pointer-events: none; /* Let clicks pass through to content */
-    z-index: -1; /* Behind main content */
-    overflow: hidden;
+    height: auto;
+    z-index: 10;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    padding: 0 10px;
 }
 
 .photo-frame {
-    position: absolute;
+    position: relative;
     background: #fff;
     padding: 8px 8px 25px 8px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.15);
     transition: transform 0.3s ease;
-    width: 180px; /* Fixed width for consistency */
-    opacity: 0.9;
+    width: 140px; /* Standard size */
+    opacity: 1; /* Fully visible in flow */
+    transform-origin: center;
 }
 
 .photo-frame img {
@@ -396,11 +412,28 @@ body {
     object-fit: cover;
 }
 
+.photo-frame:hover {
+    transform: scale(1.1) !important;
+    z-index: 20;
+}
+
 /* On mobile, we might want to hide them or reduce size noticeably so they don't cover text */
 @media (max-width: 800px) {
     .photo-frame {
         width: 120px;
-        opacity: 0.4; /* Fade them out more on small screens */
+        opacity: 0.5; /* Slightly more visible base state */
+        cursor: pointer;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        pointer-events: auto !important; /* Ensure they capture clicks */
+    }
+    
+    /* Make photos fully visible and pop out on touch/hover */
+    .photo-frame:hover, 
+    .photo-frame:active,
+    .photo-frame:focus {
+        opacity: 1;
+        z-index: 100; /* Bring to front */
+        transform: scale(1.2) rotate(0deg) !important;
     }
 }
 
