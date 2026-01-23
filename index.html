@@ -20,6 +20,17 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- QRCode Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <style>
+    /* Modal specific fixes if needed, though bootstrap handles most */
+    .modal-content {
+      background-color: var(--bg-color);
+      border: 1px solid var(--primary-color);
+    }
+  </style>
 </head>
 
 <body>
@@ -124,14 +135,83 @@
         </div>
 
         <div class="action-item">
-          <a href="pagamento.html" class="circle-icon">
+          <button type="button" class="circle-icon border-0" data-bs-toggle="modal" data-bs-target="#giftModal">
             <i class="fas fa-hand-holding-usd"></i>
-          </a>
+          </button>
           <span class="action-label">Lista de<br>presentes</span>
         </div>
       </section>
     </div>
   </main>
+
+  <!-- Gift Modal -->
+  <div class="modal fade" id="giftModal" tabindex="-1" aria-labelledby="giftModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content shadow-lg border-0" style="border-radius: 15px; overflow: hidden;">
+
+        <!-- Premium Header -->
+        <div class="modal-header justify-content-center position-relative"
+          style="background-color: var(--primary-bg-light); border-bottom: 1px solid rgba(214, 66, 104, 0.15); padding: 20px;">
+          <h1 class="month mb-0" style="font-size: 1.8rem; letter-spacing: 1px; color: var(--primary-color);">Sugestão
+            de Presente</h1>
+          <button type="button" class="btn-close position-absolute top-50 end-0 translate-middle-y me-3"
+            data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body p-4 p-md-5" style="background-color: var(--bg-color);">
+
+          <div class="pix-container mx-auto"
+            style="max-width: 500px; background: #fff; border: 1px solid rgba(214, 66, 104, 0.1);">
+            <p class="pix-instructions mb-4" style="font-size: 1rem; line-height: 1.6;">
+              <i class="fas fa-heart text-danger mb-2" style="font-size: 1.2rem;"></i><br>
+              Para nós, a sua presença é o maior presente!<br>
+              Mas, se desejar nos presentear, ficaremos muito felizes com qualquer contribuição.
+            </p>
+
+            <div class="d-flex justify-content-center mb-4">
+              <div id="qrcode" class="p-2 border rounded shadow-sm" style="background: #fff;"></div>
+            </div>
+
+            <p class="mb-2 fw-bold text-uppercase"
+              style="font-size: 0.8rem; letter-spacing: 1px; color: var(--text-secondary);">Chave Pix</p>
+
+            <div class="d-flex align-items-center justify-content-center gap-2 mb-2">
+              <div class="pix-key m-0 fw-bold" id="pix-key-text"
+                style="font-family: monospace; font-size: 1.2rem; background: #f8f9fa;">01010596047</div>
+              <button id="copy-btn" class="btn btn-outline-danger btn-sm rounded-circle"
+                style="width: 35px; height: 35px; display: flex; align-items: center; justify-content: center;"
+                title="Copiar Chave">
+                <i class="fas fa-copy"></i>
+              </button>
+            </div>
+            <div id="copy-feedback" class="text-success fw-bold small"
+              style="height: 20px; opacity: 0; transition: opacity 0.3s;">
+              <i class="fas fa-check-circle me-1"></i> Copiado com sucesso!
+            </div>
+
+            <p class="mt-4 text-muted small border-top pt-3">
+              <span class="d-block fw-bold text-uppercase" style="font-size: 0.7rem;">Dados Bancários</span>
+              Banco: Nú Pagamentos S.A<br>
+              Alexandre Azambuja Pereira
+            </p>
+          </div>
+
+          <div class="text-center mt-4">
+            <p class="pix-instructions mb-3 small text-uppercase" style="font-size: 0.75rem; letter-spacing: 1px;">
+              Ou se preferir
+            </p>
+            <a href="https://lista.havan.com.br/Convidado/ItensListaPresente/901724" target="_blank"
+              class="btn btn-outline-danger btn-lg text-uppercase px-5 rounded-pill shadow-sm hover-effect"
+              style="letter-spacing: 1px; transition: all 0.3s;">
+              <i class="fas fa-gift me-2"></i> Lista Havan
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Background Music -->
   <audio id="bg-music" loop>
     <source src="assets/musica.mp3" type="audio/mpeg">
@@ -148,6 +228,47 @@
     crossorigin="anonymous"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // --- Gift Modal QR Code Logic ---
+      const giftModal = document.getElementById('giftModal');
+      let qrGenerated = false;
+
+      giftModal.addEventListener('shown.bs.modal', function () {
+        if (!qrGenerated) {
+          const pixKey = "01010596047";
+          const pixPayload = "00020126360014BR.GOV.BCB.PIX0114+55169974466245204000053039865802BR5925Alexandre Azambuja Pereir6009SAO PAULO62140510SDxfTyxA7r63047C9F";
+
+          const qrContainer = document.getElementById("qrcode");
+          qrContainer.innerHTML = ''; // Clear previous if any logic fails
+
+          new QRCode(qrContainer, {
+            text: pixPayload,
+            width: 128,
+            height: 128,
+            colorDark: "#D64268",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.M
+          });
+          qrGenerated = true;
+        }
+      });
+
+      // Copy Functionality
+      const copyBtn = document.getElementById('copy-btn');
+      const feedback = document.getElementById('copy-feedback');
+
+      copyBtn.addEventListener('click', () => {
+        const pixKey = "01010596047";
+        navigator.clipboard.writeText(pixKey).then(() => {
+          feedback.style.opacity = '1';
+          setTimeout(() => {
+            feedback.style.opacity = '0';
+          }, 2000);
+        }).catch(err => {
+          console.error('Erro ao copiar: ', err);
+        });
+      });
+      // ----------------------------
+
       // --- Envelope Logic ---
       const envelopeOverlay = document.getElementById('envelope-overlay');
       const envelopeWrapper = document.getElementById('envelope-wrapper');
@@ -172,24 +293,43 @@
 
       // --- Dynamic Photos Logic ---
       // --- Dynamic Photos Logic ---
+      // --- Dynamic Photos Logic (Carousel) ---
       const photoContainer = document.getElementById('photo-container');
-      // Update this list if you add new photos to assets/images/fotos
-      const photos = ['1.JPG', '2.JPG', '3.JPG', '4.jpg', '5.jpg'];
 
-      photos.forEach((photo, index) => {
-        const div = document.createElement('div');
-        div.classList.add('photo-frame');
+      // Actual files in the directory
+      const photos = ['1.jpeg', '2.jpeg', '3.jpeg', '4.jpeg', '5.jpg', '6.jpg'];
 
-        const img = document.createElement('img');
-        img.src = `assets/images/fotos/${photo}`;
-        img.alt = "Foto do Casamento";
-        div.appendChild(img);
+      // Build Carousel Structure
+      let carouselHTML = `
+        <div id="weddingCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            ${photos.map((_, i) => `<button type="button" data-bs-target="#weddingCarousel" data-bs-slide-to="${i}" class="${i === 0 ? 'active' : ''}" aria-current="${i === 0 ? 'true' : 'false'}" aria-label="Slide ${i + 1}"></button>`).join('')}
+          </div>
+          <div class="carousel-inner">
+            ${photos.map((photo, i) => `
+              <div class="carousel-item ${i === 0 ? 'active' : ''}" data-bs-interval="3000">
+                <img src="assets/images/fotos/${photo}" class="d-block w-100" alt="Foto do Casamento ${i + 1}">
+              </div>
+            `).join('')}
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#weddingCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#weddingCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Próximo</span>
+          </button>
+        </div>
+      `;
 
-        // Subtle random rotation for natural feel (no absolute positioning)
-        div.style.transform = `rotate(${Math.random() * 6 - 3}deg)`;
+      // Inject into container
+      const wrapper = document.createElement('div');
+      wrapper.id = 'photo-carousel';
+      wrapper.innerHTML = carouselHTML;
 
-        photoContainer.appendChild(div);
-      });
+      photoContainer.innerHTML = ''; // Clear existing
+      photoContainer.appendChild(wrapper);
       // ----------------------------
 
       // Music Control Logic

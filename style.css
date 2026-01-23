@@ -645,3 +645,109 @@ body {
     0%, 100% { opacity: 0.5; }
     50% { opacity: 1; }
 }
+
+/* Carousel Styling */
+#photo-carousel {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto 30px auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    background: #fff;
+    padding: 10px;
+}
+
+.carousel-inner {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 400px; /* Fixed height for consistency */
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.carousel-control-prev, .carousel-control-next {
+    width: 10%;
+    opacity: 0.7;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    padding: 20px;
+    background-size: 50%;
+}
+
+.carousel-indicators [data-bs-target] {
+    background-color: var(--primary-color);
+}
+
+@media (max-width: 600px) {
+    .carousel-item img {
+        height: 300px;
+    }
+}
+
+/* Payment & Gift Section Styles */
+.pix-container {
+  background: rgba(255, 255, 255, 0.6);
+  padding: 30px;
+  border-radius: 12px;
+  margin-top: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.pix-key {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--primary-color);
+  background: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin: 15px 0;
+  border: 1px dashed var(--primary-color);
+  display: inline-block;
+  word-break: break-all;
+}
+
+.pix-instructions {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-color);
+  margin-bottom: 20px;
+}
+
+/* Hero Header with Capa Image */
+.hero-header-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 2rem;
+  overflow: hidden;
+  border-radius: 20px 20px 0 0; /* Matches content-card radius roughly if placed inside */
+}
+
+.hero-header-img {
+  width: 100%;
+  height: 50vh; /* Adjust as needed */
+  max-height: 500px;
+  object-fit: cover;
+  object-position: center top; 
+  display: block;
+  
+  /* The smooth transition effect */
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%);
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%);
+  
+  /* Contrast/Beauty enhancement */
+  filter: sepia(10%) contrast(105%) brightness(105%);
+  transition: transform 0.5s ease;
+}
+
+.hero-header-container:hover .hero-header-img {
+  transform: scale(1.02); /* Subtle zoom on hover */
+}
