@@ -117,30 +117,8 @@
       <!-- Photos Gallery (Centered) -->
       <div id="photo-container"></div>
 
-      <!-- Action Icons -->
-      <section class="actions-section fade-in delay-4">
-        <div class="action-item">
-          <a href="https://www.google.com.br/maps/place/Caba%C3%B1a+Restaurante+Argentino/@-21.1948495,-47.8108487,348m/data=!3m1!1e3!4m6!3m5!1s0x94b9bedb88eb8ec1:0xb2fe655e52b5d27b!8m2!3d-21.1951873!4d-47.8098562!16s%2Fg%2F11b6_9jvhd?hl=pt-BR&entry=ttu&g_ep=EgoyMDI1MTIwOC4wIKXMDSoASAFQAw%3D%3D"
-            target="_blank" class="circle-icon">
-            <i class="fas fa-map-marker-alt"></i>
-          </a>
-          <span class="action-label">Localização</span>
-        </div>
-        <div class="action-item">
-          <a href="https://api.whatsapp.com/send?phone=5516997446624&text=Ol%C3%A1%2C+gostaria+de+confirmar+a+minha+presen%C3%A7a+para+o+Casamento+de+Alexandre+e+Josilene%21"
-            class="circle-icon" rel="noopener noreferrer">
-            <i class="fas fa-check"></i>
-          </a>
-          <span class="action-label">Confirmação<br>de presença</span>
-        </div>
+      <!-- Action Icons moved to fixed bottom bar -->
 
-        <div class="action-item">
-          <button type="button" class="circle-icon border-0" data-bs-toggle="modal" data-bs-target="#giftModal">
-            <i class="fas fa-hand-holding-usd"></i>
-          </button>
-          <span class="action-label">Lista de<br>presentes</span>
-        </div>
-      </section>
     </div>
   </main>
 
@@ -218,9 +196,38 @@
     Seu navegador não suporta o elemento de áudio.
   </audio>
 
-  <!-- Floating Music Control -->
-  <div class="music-control" id="music-control">
-    <i class="fas fa-play" id="music-icon"></i>
+  <!-- Fixed Bottom Action Bar -->
+  <div class="fixed-action-bar">
+    <div class="fixed-item">
+      <a href="https://www.google.com.br/maps/place/Caba%C3%B1a+Restaurante+Argentino/@-21.1948495,-47.8108487,348m/data=!3m1!1e3!4m6!3m5!1s0x94b9bedb88eb8ec1:0xb2fe655e52b5d27b!8m2!3d-21.1951873!4d-47.8098562!16s%2Fg%2F11b6_9jvhd?hl=pt-BR&entry=ttu&g_ep=EgoyMDI1MTIwOC4wIKXMDSoASAFQAw%3D%3D"
+        target="_blank" class="fixed-icon-btn" title="Localização">
+        <i class="fas fa-map-marker-alt"></i>
+      </a>
+      <span class="action-label">Localização</span>
+    </div>
+
+    <div class="fixed-item">
+      <a href="https://api.whatsapp.com/send?phone=5516997446624&text=Ol%C3%A1%2C+gostaria+de+confirmar+a+minha+presen%C3%A7a+para+o+Casamento+de+Alexandre+e+Josilene%21"
+        class="fixed-icon-btn" rel="noopener noreferrer" title="Confirmar Presença">
+        <i class="fas fa-check"></i>
+      </a>
+      <span class="action-label">Confirmação</span>
+    </div>
+
+    <div class="fixed-item">
+      <button type="button" class="fixed-icon-btn" data-bs-toggle="modal" data-bs-target="#giftModal"
+        title="Lista de Presentes">
+        <i class="fas fa-gift"></i>
+      </button>
+      <span class="action-label">Presentes</span>
+    </div>
+
+    <div class="fixed-item">
+      <div class="fixed-icon-btn" id="music-control">
+        <i class="fas fa-play" id="music-icon"></i>
+      </div>
+      <span class="action-label">Música</span>
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
