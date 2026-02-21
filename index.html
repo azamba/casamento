@@ -122,6 +122,28 @@
     </div>
   </main>
 
+  <!-- Confirmation Closed Modal -->
+  <div class="modal fade" id="confirmationClosedModal" tabindex="-1" aria-labelledby="confirmationClosedModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content shadow-lg border-0" style="border-radius: 15px; overflow: hidden;">
+        <div class="modal-header justify-content-center position-relative"
+          style="background-color: var(--primary-bg-light); border-bottom: 1px solid rgba(214, 66, 104, 0.15); padding: 20px;">
+          <h1 class="month mb-0 text-center"
+            style="font-size: 1.5rem; letter-spacing: 1px; color: var(--primary-color);">Confirmações Encerradas</h1>
+          <button type="button" class="btn-close position-absolute top-50 end-0 translate-middle-y me-3"
+            data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4 text-center" style="background-color: var(--bg-color);">
+          <i class="fas fa-info-circle mb-3" style="color: var(--primary-color); font-size: 2.5rem;"></i>
+          <p class="mb-0" style="font-size: 1.1rem; line-height: 1.6;">
+            Agradecemos o seu contato, mas as confirmações de presença já foram encerradas.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Gift Modal -->
   <div class="modal fade" id="giftModal" tabindex="-1" aria-labelledby="giftModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -207,10 +229,10 @@
     </div>
 
     <div class="fixed-item">
-      <a href="https://api.whatsapp.com/send?phone=5516997446624&text=Ol%C3%A1%2C+gostaria+de+confirmar+a+minha+presen%C3%A7a+para+o+Casamento+de+Alexandre+e+Josilene%21"
-        class="fixed-icon-btn" rel="noopener noreferrer" title="Confirmar Presença">
+      <button type="button" class="fixed-icon-btn" data-bs-toggle="modal" data-bs-target="#confirmationClosedModal"
+        title="Confirmar Presença">
         <i class="fas fa-check"></i>
-      </a>
+      </button>
       <span class="action-label">Confirmação</span>
     </div>
 
